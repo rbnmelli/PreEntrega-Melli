@@ -5,16 +5,16 @@ alert(`Hola ${userName}, comencemos!`)
 
 // Funciones aritméticas básicas para dos parámetros. //Basic arithmetic functions for two parameters.
 
-let add = (x,y) => x+y;
-let subtract = (x,y) => x-y;
-let multiply = (x,y) => x*y;
-let divide = (x,y) => x/y;
-let exponentiation = x => x**2;
-let rootOfNumber = x => Math.sqrt(x);
+const add = (x,y) => x+y;
+const subtract = (x,y) => x-y;
+const multiply = (x,y) => x*y;
+const divide = (x,y) => x/y;
+const exponentiation = x => x**2;
+const rootOfNumber = x => Math.sqrt(x);
 
 // Función que verifica si se ingresa un tipo de dato valido (número) y en caso de ser inválido pide corrección. // Function that verifies if a valid data type (number) is entered and if it is invalid, it requests correction.
 
-let verifyNumber = function(num){
+const verifyNumber = function(num){
     num = num.toString();
     while(num === 'NaN'){
         num = Number(prompt(`Caracter invalido\nIngrese un numero:`));
@@ -44,27 +44,33 @@ while (exit != 'n') {
     switch (operador) {
         case '**': alert(`Resultado:   ${numberOne}² = ${exponentiation(numberOne)}`);
             break;
-        case '/2': alert(`Resultado:   √${numberOne} = ${rootOfNumber(numberOne)}`);
+        case '/2': 
+            if(numberOne < 0){
+                alert(`Error, no existe raíz cuadrada de un número negativo`);
+                break;
+            }else{
+                alert(`Resultado:   √${numberOne} = ${rootOfNumber(numberOne)}`);
             break;
+            }
         default:
-            // Ingresa el segundo dato y llamo a la función verifyNumber // Enter the second data and call the verifyNumber funct   ion
-            let numberTwo = Number(prompt(`${numberOne} ${operador}\nIngrese numero:`));
-            numberTwo = verifyNumber(numberTwo);
-            //Se realiza el cálculo pedido llamando a la función correspondiente y muestro el resultado. // The requested calculation is performed by calling the corresponding function and I display the result.
-            switch (operador) {
-                case '+': alert(`Resultado:   ${numberOne} + ${numberTwo} = ${add(numberOne, numberTwo)}`);
-                    break;
-                case '-': alert(`Resultado:   ${numberOne} - ${numberTwo} = ${subtract(numberOne, numberTwo)}`);
-                    break;
-                case '*': alert(`Resultado:   ${numberOne} * ${numberTwo} = ${multiply(numberOne, numberTwo)}`);
-                    break;
-                case '/': 
-                    if(numberTwo == 0){
-                        alert(`Error, no es posible dividir por 0`);
-                    }else{
-                        alert(`Resultado:   ${numberOne} / ${numberTwo} = ${divide(numberOne, numberTwo)}`);
-                    break;
-                    }
+        // Ingresa el segundo dato y llamo a la función verifyNumber // Enter the second data and call the verifyNumber funct   ion
+        let numberTwo = Number(prompt(`${numberOne} ${operador}\nIngrese numero:`));
+        numberTwo = verifyNumber(numberTwo);
+        //Se realiza el cálculo pedido llamando a la función correspondiente y muestro el resultado. // The requested calculation is performed by calling the corresponding function and I display the result.
+        switch (operador) {
+            case '+': alert(`Resultado:   ${numberOne} + ${numberTwo} = ${add(numberOne, numberTwo)}`);
+                break;
+            case '-': alert(`Resultado:   ${numberOne} - ${numberTwo} = ${subtract(numberOne, numberTwo)}`);
+                break;
+            case '*': alert(`Resultado:   ${numberOne} * ${numberTwo} = ${multiply(numberOne, numberTwo)}`);
+                break;
+            case '/': 
+                if(numberTwo == 0){
+                    alert(`Error, no es posible dividir por 0`);
+                }else{
+                    alert(`Resultado:   ${numberOne} / ${numberTwo} = ${divide(numberOne, numberTwo)}`);
+                break;
+                }
             }
         }
         // Pido al usuario que decida si quiere seguir o terminar. Verifico que sea una opción valida, si no pido que vuelva a ingresar. // I ask the user to decide if they want to continue or end. I verify that it is a valid option, if not I ask you to enter again.
